@@ -1,5 +1,7 @@
 // index.js
 
+//import Contact from "./contact.js";
+    
 
 /*var number = 5;
 let name = "Denis";
@@ -36,7 +38,9 @@ function clearMessage(){
 const contactForm = document.getElementById("contact");
 contactForm.addEventListener("submit", function(event){
 event.preventDefault();
-showMessage("Sending your message...");
+const contact = new Contact(contactForm);
+contact.send();
+showMessage("Sending your message... Thank you"+ contact.fullname);
 });
 
 const experiences = document.getElementsByClassName("experience");
@@ -49,3 +53,30 @@ for(let x = 0; x < experiences.length;x++ ){
         event.target.style = "";
     });
 }
+class Contact{
+    constructor(form){
+        this.fullname = form.elements["fullname"].value
+        this.email = form.elements["email"].value
+        this.subject = form.elements["subject"].value
+        this.body = form.elements["msg"].value
+
+    }
+
+    fullname = "";
+    email = "";
+    subject = "";
+    body = "";
+
+    send(){
+        console.info(this.formatMessage());
+        document.getElementById("formInfo").innerHTML ="we`re not sending email yet... feature for version 2";
+
+    }
+
+    formatMessage(){
+        return `to: ${this.fullname}
+                Email:${this.email}
+                Subject: ${this.subject}
+                Body: ${this.body}`;
+    }
+};
